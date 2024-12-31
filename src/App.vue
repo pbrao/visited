@@ -55,19 +55,20 @@
         </v-toolbar>
         <v-card-text>
           <v-row>
-            <v-col
-              cols="12"
-              md="6"
-            >
+            <v-col cols="12" md="6">
               <v-card>
-                <v-card-title>
-                  Stats
-                </v-card-title>
+                <v-card-title>Stats</v-card-title>
                 <v-card-text>
                   <p>{{ visitedCount }} / {{ totalCountries }} countries visited</p>
                   <p>{{ visitedPercentage }}% visited, {{ remainingPercentage }}% remaining</p>
                 </v-card-text>
               </v-card>
+            </v-col>
+            <v-col cols="12" md="6">
+              <PieChart
+                title="Visited Countries"
+                :data="chartData"
+              />
             </v-col>
           </v-row>
           <div style="max-height: 70vh; overflow-y: auto;">
@@ -103,6 +104,7 @@
 
 <script>
 import { createClient } from '@supabase/supabase-js';
+import PieChart from './components/PieChart.vue';
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -150,6 +152,18 @@ export default {
       return this.countries.filter(country =>
         country.name.toLowerCase().startsWith(this.filterText.toLowerCase())
       );
+    },
+    chartData() {
+      return {
+        labels: ['Visited', 'Remaining'],
+        datasets: [
+          {
+            label: 'Countries',
+            data: [this.visitedCount, this.totalCountries - this.visitedCount],
+            backgroundColor: ['#4CAF50', '#FF5252'], // Green for visited, red for remaining
+          },
+        ],
+      };
     }
   },
   async mounted() {
