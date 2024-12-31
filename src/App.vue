@@ -326,21 +326,12 @@ export default {
   max-width: 400px;
 }
 
-.sticky-row {
+.sticky-section {
   position: sticky;
   top: 0;
   z-index: 2;
   background: white;
   padding-bottom: 16px;
-}
-
-.sticky-col {
-  position: sticky;
-  top: 0;
-}
-
-.sticky-card {
-  position: sticky;
-  top: 0;
+  margin-bottom: 16px;
 }
 </style>
