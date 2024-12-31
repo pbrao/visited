@@ -65,10 +65,15 @@
               </v-card>
             </v-col>
             <v-col cols="12" md="6">
-              <PieChart
-                title="Visited Countries"
-                :data="chartData"
-              />
+              <v-card>
+                <v-card-title>Visited Countries</v-card-title>
+                <v-card-text>
+                  <PieChart
+                    title="Visited Countries"
+                    :data="chartData"
+                  />
+                </v-card-text>
+              </v-card>
             </v-col>
           </v-row>
           <div style="max-height: 70vh; overflow-y: auto;">
