@@ -312,6 +312,11 @@ export default {
   height: 30px !important; /* Force the height to 30px */
 }
 
+.v-data-table >>> .v-checkbox {
+  transform: scale(0.7); /* Reduce the size of the checkbox by 30% */
+  transform-origin: left center; /* Keep the checkbox aligned to the left */
+}
+
 .v-data-table >>> .v-data-table__td {
   padding-top: 4px !important; /* Force top padding to 4px */
   padding-bottom: 4px !important; /* Force bottom padding to 4px */
