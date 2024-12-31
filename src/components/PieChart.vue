@@ -1,11 +1,7 @@
 <template>
-  <v-card>
-    <v-card-text>
-      <div class="chart-container">
-        <canvas ref="pieChart" width="200" height="200"></canvas>
-      </div>
-    </v-card-text>
-  </v-card>
+  <div class="chart-container">
+    <canvas ref="pieChart" width="200" height="200"></canvas>
+  </div>
 </template>
 
 <script>
