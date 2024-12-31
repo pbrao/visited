@@ -267,13 +267,20 @@ export default {
     },
     async fetchCountries() {
       try {
+        console.log('Fetching countries for user:', this.user.id); // Debug log
+
         // Fetch all countries
         const { data: allCountries, error: countriesError } = await supabase
           .from('countries')
           .select('*')
           .order('name', { ascending: true });
 
-        if (countriesError) throw countriesError;
+        if (countriesError) {
+          console.error('Error fetching countries:', countriesError);
+          throw countriesError;
+        }
+
+        console.log('Fetched all countries:', allCountries); // Debug log
 
         // Fetch the user's visited status
         const { data: userCountries, error: userCountriesError } = await supabase
@@ -281,7 +288,12 @@ export default {
           .select('country_id, visited')
           .eq('user_id', this.user.id);
 
-        if (userCountriesError) throw userCountriesError;
+        if (userCountriesError) {
+          console.error('Error fetching user countries:', userCountriesError);
+          throw userCountriesError;
+        }
+
+        console.log('Fetched user countries:', userCountries); // Debug log
 
         // Merge the data
         this.countries = allCountries.map((country, index) => {
@@ -294,8 +306,11 @@ export default {
             visited: userCountry ? userCountry.visited : false,
           };
         });
+
+        console.log('Merged countries data:', this.countries); // Debug log
       } catch (error) {
-        console.error('Error fetching countries:', error);
+        console.error('Error in fetchCountries:', error);
+        throw error;
       }
     },
     async updateVisitedStatus(country) {
