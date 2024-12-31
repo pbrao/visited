@@ -54,9 +54,10 @@
           </v-btn>
         </v-toolbar>
         <v-card-text>
-          <v-row class="sticky-row">
-            <v-col cols="12" md="6" class="sticky-col">
-              <v-card class="sticky-card">
+          <!-- Sticky Section -->
+          <v-row class="sticky-section">
+            <v-col cols="12" md="6">
+              <v-card>
                 <v-card-title>Stats</v-card-title>
                 <v-card-text>
                   <p>{{ visitedCount }} / {{ totalCountries }} Countries Visited</p>
@@ -64,8 +65,8 @@
                 </v-card-text>
               </v-card>
             </v-col>
-            <v-col cols="12" md="6" class="sticky-col">
-              <v-card class="sticky-card">
+            <v-col cols="12" md="6">
+              <v-card>
                 <v-card-title>Visited Countries</v-card-title>
                 <v-card-text>
                   <PieChart
@@ -76,23 +77,25 @@
               </v-card>
             </v-col>
           </v-row>
-          <div style="position: sticky; top: 0; background: white; z-index: 1;">
-            <v-text-field
-              v-model="filterText"
-              label="Filter countries"
-              outlined
-              clearable
-              class="mb-4"
-            />
-          </div>
-          <v-data-table
-            :headers="headers"
-            :items="filteredCountries"
-            :items-per-page="-1"
-            density="compact"
-            hover
-            fixed-header
-          >
+
+          <!-- Filter and Table Section -->
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                v-model="filterText"
+                label="Filter countries"
+                outlined
+                clearable
+                class="mb-4"
+              />
+              <v-data-table
+                :headers="headers"
+                :items="filteredCountries"
+                :items-per-page="-1"
+                density="compact"
+                hover
+                fixed-header
+              >
             <template v-slot:item.visited="{ item }">
               <v-checkbox-btn
                 inline
