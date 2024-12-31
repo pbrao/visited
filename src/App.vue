@@ -309,11 +309,11 @@ export default {
 }
 
 .v-data-table >>> .v-data-table__tr {
-  height: 30px; /* Reduced from 40px to 30px (25% smaller) */
+  height: 30px !important; /* Force the height to 30px */
 }
 
 .v-data-table >>> .v-data-table__td {
-  padding-top: 4px; /* Reduced from 8px to 4px */
-  padding-bottom: 4px; /* Reduced from 8px to 4px */
+  padding-top: 4px !important; /* Force top padding to 4px */
+  padding-bottom: 4px !important; /* Force bottom padding to 4px */
 }
 </style>
