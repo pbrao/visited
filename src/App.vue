@@ -331,6 +331,49 @@ export default {
       } catch (error) {
         console.error('Error updating visited status:', error);
       }
+    },
+
+    async initializeCountriesForNewUser() {
+      try {
+        // Check if user already has any country data
+        const { data: existingData, error: checkError } = await supabase
+          .from('user_countries')
+          .select('country_id')
+          .eq('user_id', this.user.id)
+          .limit(1);
+
+        if (checkError) throw checkError;
+
+        // If no existing data, initialize with all countries as unvisited
+        if (!existingData || existingData.length === 0) {
+          console.log('Initializing countries for new user');
+          
+          // Get all countries
+          const { data: countries, error: countriesError } = await supabase
+            .from('countries')
+            .select('id');
+
+          if (countriesError) throw countriesError;
+
+          // Prepare the data for insertion
+          const userCountries = countries.map(country => ({
+            user_id: this.user.id,
+            country_id: country.id,
+            visited: false
+          }));
+
+          // Insert the records
+          const { error: insertError } = await supabase
+            .from('user_countries')
+            .insert(userCountries);
+
+          if (insertError) throw insertError;
+          
+          console.log('Successfully initialized countries for new user');
+        }
+      } catch (error) {
+        console.error('Error initializing countries:', error);
+      }
     }
   }
 }
