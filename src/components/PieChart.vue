@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title>{{ title }}</v-card-title>
     <v-card-text>
-      <canvas ref="pieChart" width="400" height="400"></canvas> <!-- Explicit width and height -->
+      <canvas ref="pieChart" width="200" height="200"></canvas> <!-- Reduced size -->
     </v-card-text>
   </v-card>
 </template>
@@ -56,8 +56,8 @@ export default {
 
 <style scoped>
 canvas {
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 400px; /* Ensure the canvas has a minimum height */
+  width: 200px !important; /* Fixed width */
+  height: 200px !important; /* Fixed height */
+  min-height: 200px; /* Ensure the canvas has a minimum height */
 }
 </style>
