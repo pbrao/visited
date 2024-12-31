@@ -38,7 +38,7 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "vue/valid-v-slot": ["error", { "allowModifiers": false }]
+      "vue/valid-v-slot": ["error", { "allowModifiers": true }]
     }
   },
   "browserslist": [
