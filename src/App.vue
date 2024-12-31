@@ -132,9 +132,9 @@ export default {
       countries: [], // All countries with user-specific visited status
       filterText: '', // New property for filter text
       headers: [
-        { text: '#', value: 'index' },
-        { text: 'Country', value: 'name' },
-        { text: 'Visited', value: 'visited' },
+        { text: '#', value: 'index', align: 'start', sortable: false },
+        { text: 'Country Name', value: 'name', align: 'start', sortable: false },
+        { text: 'Visited', value: 'visited', align: 'center', sortable: false },
       ],
     };
   },
@@ -301,6 +301,18 @@ export default {
 .auth-section {
   margin: 20px auto;
   max-width: 400px;
+}
+
+.v-data-table >>> .v-data-table__thead {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 2;
+}
+
+.v-data-table >>> .v-data-table__wrapper {
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .v-data-table >>> .v-data-table__tr:hover {
