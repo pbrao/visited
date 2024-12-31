@@ -59,8 +59,8 @@
               <v-card>
                 <v-card-title>Stats</v-card-title>
                 <v-card-text>
-                  <p>{{ visitedCount }} / {{ totalCountries }} countries visited</p>
-                  <p>{{ visitedPercentage }}% visited, {{ remainingPercentage }}% remaining</p>
+                  <p>{{ visitedCount }} / {{ totalCountries }} Countries Visited</p>
+                  <p>{{ visitedPercentage }}% Visited, {{ remainingPercentage }}% Remaining</p>
                 </v-card-text>
               </v-card>
             </v-col>
@@ -362,6 +362,7 @@ export default {
 
 .v-data-table >>> .v-data-table-header__content {
   white-space: nowrap;
+  visibility: visible !important;
 }
 
 .v-data-table >>> .v-data-table__wrapper {
@@ -376,10 +377,6 @@ export default {
 
 .v-data-table >>> .v-data-table__tr {
   height: 30px !important; /* Force the height to 30px */
-}
-
-.v-data-table >>> .v-data-table-header__content {
-  visibility: visible !important;
 }
 
 .v-data-table >>> .v-checkbox {
