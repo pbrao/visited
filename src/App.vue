@@ -307,4 +307,13 @@ export default {
   background-color: #f5f5f5;
   cursor: pointer;
 }
+
+.v-data-table >>> .v-data-table__tr {
+  height: 40px; /* Adjust this value to make rows smaller */
+}
+
+.v-data-table >>> .v-data-table__td {
+  padding-top: 8px; /* Reduce top padding */
+  padding-bottom: 8px; /* Reduce bottom padding */
+}
 </style>
