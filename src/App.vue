@@ -308,6 +308,12 @@ export default {
   top: 0;
   background-color: white;
   z-index: 2;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.v-data-table >>> .v-data-table-header__content {
+  white-space: nowrap;
 }
 
 .v-data-table >>> .v-data-table__wrapper {
