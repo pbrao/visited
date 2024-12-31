@@ -357,7 +357,7 @@ export default {
 }
 
 .v-data-table >>> .v-data-table__tr {
-  height: 30px !important; /* Force the height to 30px */
+  height: 15px !important; /* Reduced from 30px to 15px */
 }
 
 .v-data-table >>> .v-checkbox {
@@ -366,7 +366,8 @@ export default {
 }
 
 .v-data-table >>> .v-data-table__td {
-  padding-top: 4px !important; /* Force top padding to 4px */
-  padding-bottom: 4px !important; /* Force bottom padding to 4px */
+  padding-top: 2px !important; /* Reduced from 4px to 2px */
+  padding-bottom: 2px !important; /* Reduced from 4px to 2px */
+  min-height: 15px !important; /* Added to ensure consistent height */
 }
 </style>
