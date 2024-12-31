@@ -38,7 +38,18 @@ export default {
           plugins: {
             legend: {
               display: true,
-              position: 'right', // Move the legend to the right
+              position: 'right',
+            },
+            tooltip: {
+              callbacks: {
+                label: (context) => {
+                  const label = context.label || '';
+                  const value = context.raw || 0;
+                  const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                  const percentage = ((value / total) * 100).toFixed(2) + '%';
+                  return `${label}: ${value} (${percentage})`;
+                },
+              },
             },
           },
         },
