@@ -114,6 +114,9 @@ const supabase = createClient(
 
 export default {
   name: 'App',
+  components: {
+    PieChart
+  },
   data() {
     return {
       email: '',
