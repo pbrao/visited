@@ -51,6 +51,7 @@
             :items-per-page="10"
             class="elevation-1 mt-4"
           >
+            <!-- eslint-disable-next-line vue/valid-v-slot -->
             <template #item.visited="{ item }">
               <v-checkbox
                 v-model="item.visited"
