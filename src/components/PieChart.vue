@@ -2,7 +2,9 @@
   <v-card>
     <v-card-title>{{ title }}</v-card-title>
     <v-card-text>
-      <canvas ref="pieChart" width="200" height="200"></canvas> <!-- Reduced size -->
+      <div class="chart-container">
+        <canvas ref="pieChart" width="200" height="200"></canvas>
+      </div>
     </v-card-text>
   </v-card>
 </template>
@@ -55,9 +57,14 @@ export default {
 </script>
 
 <style scoped>
+.chart-container {
+  width: 200px; /* Fixed width for the container */
+  height: 200px; /* Fixed height for the container */
+  margin: 0 auto; /* Center the chart */
+}
+
 canvas {
-  width: 200px !important; /* Fixed width */
-  height: 200px !important; /* Fixed height */
-  min-height: 200px; /* Ensure the canvas has a minimum height */
+  width: 100% !important; /* Ensure canvas fills the container */
+  height: 100% !important; /* Ensure canvas fills the container */
 }
 </style>
