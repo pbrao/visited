@@ -53,7 +53,7 @@ export default {
 
 <style scoped>
 .chart-container {
-  width: 200px; /* Fixed width for the container */
+  width: 300px; /* Increase width to accommodate the legend */
   height: 200px; /* Fixed height for the container */
   margin: 0 auto; /* Center the chart */
 }
