@@ -16,6 +16,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      chartInstance: null, // Store the chart instance
+    };
+  },
   watch: {
     data: {
       handler(newData) {
@@ -36,9 +41,14 @@ export default {
         return;
       }
 
+      // Destroy the existing chart instance if it exists
+      if (this.chartInstance) {
+        this.chartInstance.destroy();
+      }
+
       const ctx = this.$refs.pieChart.getContext('2d');
       console.log('Chart Data:', this.data); // Debugging: Log the chart data
-      new Chart(ctx, {
+      this.chartInstance = new Chart(ctx, {
         type: 'pie',
         data: this.data,
         options: {
@@ -64,6 +74,13 @@ export default {
         },
       });
     },
+  },
+  },
+  beforeUnmount() {
+    // Destroy the chart instance when the component is unmounted
+    if (this.chartInstance) {
+      this.chartInstance.destroy();
+    }
   },
 };
 </script>
