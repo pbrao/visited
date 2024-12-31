@@ -16,6 +16,15 @@ export default {
       required: true,
     },
   },
+  watch: {
+    data: {
+      handler(newData) {
+        console.log('Chart data updated:', newData); // Debugging: Log the updated data
+        this.renderChart();
+      },
+      deep: true, // Watch for changes in nested properties
+    },
+  },
   mounted() {
     console.log('PieChart mounted with data:', this.data); // Debugging: Log the data
     this.renderChart();
