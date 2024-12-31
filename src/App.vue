@@ -79,7 +79,7 @@
               height="auto"
               fixed-header
             >
-              <template v-slot:item.visited="{ item }">
+              <template #item.visited="{ item }">
                 <v-checkbox
                   v-model="item.visited"
                   @change="updateVisitedStatus(item)"
