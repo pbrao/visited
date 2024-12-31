@@ -24,10 +24,16 @@ export default {
     },
   },
   mounted() {
+    console.log('PieChart mounted with data:', this.data); // Debugging: Log the data
     this.renderChart();
   },
   methods: {
     renderChart() {
+      if (!this.data || !this.data.datasets || this.data.datasets.length === 0) {
+        console.error('Invalid chart data:', this.data);
+        return;
+      }
+
       const ctx = this.$refs.pieChart.getContext('2d');
       console.log('Chart Data:', this.data); // Debugging: Log the chart data
       new Chart(ctx, {
@@ -52,5 +58,6 @@ export default {
 canvas {
   width: 100% !important;
   height: 100% !important;
+  min-height: 400px; /* Ensure the canvas has a minimum height */
 }
 </style>
