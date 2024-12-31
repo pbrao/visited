@@ -137,21 +137,24 @@ export default {
           value: 'index', 
           align: 'start', 
           sortable: false,
-          width: '50px' 
+          width: '50px',
+          class: 'header-cell' 
         },
         { 
           text: 'Country Name', 
           value: 'name', 
           align: 'start', 
           sortable: false,
-          width: '200px' 
+          width: '200px',
+          class: 'header-cell' 
         },
         { 
           text: 'Visited', 
           value: 'visited', 
           align: 'center', 
           sortable: false,
-          width: '100px' 
+          width: '100px',
+          class: 'header-cell' 
         },
       ],
     };
@@ -198,8 +201,8 @@ export default {
     }
   },
   async mounted() {
-    // Debug headers
-    console.log('Headers:', this.headers);
+    // Debug headers and verify structure
+    console.log('Headers:', JSON.stringify(this.headers, null, 2));
 
     // Check if the user is already signed in
     const { data: { user } } = await supabase.auth.getUser();
@@ -332,6 +335,13 @@ export default {
   z-index: 2;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.v-data-table >>> .header-cell {
+  background-color: #f5f5f5;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #333;
 }
 
 .v-data-table >>> .v-data-table-header__content {
