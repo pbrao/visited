@@ -96,19 +96,19 @@
                 hover
                 fixed-header
               >
-            <template v-slot:item.visited="{ item }">
-              <v-checkbox-btn
-                inline
-                color="indigo"
-                v-model="item.visited"
-                @change="updateVisitedStatus(item)"
-                density="compact"
-                :align="center"
-              />
-            </template>
-          </v-data-table>
-        </v-card-text>
-      </v-card>
+                <template v-slot:item.visited="{ item }">
+                  <v-checkbox-btn
+                    inline
+                    color="indigo"
+                    v-model="item.visited"
+                    @change="updateVisitedStatus(item)"
+                    density="compact"
+                    :align="center"
+                  />
+                </template>
+              </v-data-table>
+            </v-col>
+          </v-row>
     </v-container>
   </v-app>
 </template>
