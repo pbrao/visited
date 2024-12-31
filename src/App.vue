@@ -76,7 +76,7 @@
               </v-card>
             </v-col>
           </v-row>
-          <div style="max-height: 70vh; overflow-y: auto;">
+          <div style="position: sticky; top: 0; background: white; z-index: 1;">
             <v-text-field
               v-model="filterText"
               label="Filter countries"
@@ -84,6 +84,8 @@
               clearable
               class="mb-4"
             />
+          </div>
+          <div style="max-height: 70vh; overflow-y: auto;">
             <v-data-table
               :headers="headers"
               :items="filteredCountries"
