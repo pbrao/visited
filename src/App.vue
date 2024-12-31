@@ -94,7 +94,7 @@
             fixed-header
           >
             <template v-slot:item.visited="{ item }">
-              <v-checkbox
+              <v-checkbox-btn
                 color="indigo"
                 v-model="item.visited"
                 @change="updateVisitedStatus(item)"
