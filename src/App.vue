@@ -182,7 +182,7 @@ export default {
         : this.countries.filter(country =>
             country.name.toLowerCase().startsWith(this.filterText.toLowerCase())
           );
-      console.log('Filtered Countries:', filtered); // Debugging
+      console.log('Filtered Countries:', JSON.stringify(filtered, null, 2)); // Debugging
       return filtered;
     },
     chartData() {
@@ -360,6 +360,10 @@ export default {
 
 .v-data-table >>> .v-data-table__tr {
   height: 30px !important; /* Force the height to 30px */
+}
+
+.v-data-table >>> .v-data-table-header__content {
+  visibility: visible !important;
 }
 
 .v-data-table >>> .v-checkbox {
