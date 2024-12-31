@@ -361,8 +361,8 @@ export default {
 }
 
 .v-data-table >>> .v-checkbox {
-  transform: scale(0.7); /* Reduce the size of the checkbox by 30% */
-  transform-origin: left center; /* Keep the checkbox aligned to the left */
+  transform: scale(0.5); /* Reduced from 0.7 to 0.5 */
+  transform-origin: left center;
 }
 
 .v-data-table >>> .v-data-table__td {
