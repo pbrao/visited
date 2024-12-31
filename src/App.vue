@@ -69,6 +69,7 @@
                 <v-card-title>Visited Countries</v-card-title>
                 <v-card-text>
                   <PieChart
+                    v-if="chartData.datasets[0].data.length > 0" <!-- Render only if data is available -->
                     title="Visited Countries"
                     :data="chartData"
                   />
@@ -162,16 +163,18 @@ export default {
       );
     },
     chartData() {
-      return {
+      const data = {
         labels: ['Visited', 'Remaining'],
         datasets: [
           {
             label: 'Countries',
             data: [this.visitedCount, this.totalCountries - this.visitedCount],
-            backgroundColor: ['#4CAF50', '#FF5252'], // Green for visited, red for remaining
+            backgroundColor: ['#4CAF50', '#FF5252'],
           },
         ],
       };
+      console.log('Computed Chart Data:', data); // Debugging: Log the computed data
+      return data;
     }
   },
   async mounted() {
