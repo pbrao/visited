@@ -75,7 +75,6 @@ export default {
       });
     },
   },
-  },
   beforeUnmount() {
     // Destroy the chart instance when the component is unmounted
     if (this.chartInstance) {
