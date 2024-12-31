@@ -92,7 +92,6 @@
               :items-per-page="-1"
               density="compact" 
               class="elevation-1 mt-2" 
-              height="auto"
               fixed-header
               hover
             >
