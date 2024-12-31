@@ -1,49 +1,67 @@
 <template>
-  <div>
+  <v-app>
     <!-- Authentication Section -->
-    <div v-if="!user" class="auth-section">
-      <h2>Sign In with Magic Link</h2>
-      <input v-model="email" type="email" placeholder="Enter your email" />
-      <button @click="signInWithMagicLink">Send Magic Link</button>
-      <p v-if="authMessage" class="auth-message">{{ authMessage }}</p>
-    </div>
+    <v-container v-if="!user" class="auth-section">
+      <v-card class="mx-auto" max-width="400">
+        <v-card-title class="text-center">Sign In with Magic Link</v-card-title>
+        <v-card-text>
+          <v-text-field
+            v-model="email"
+            label="Enter your email"
+            type="email"
+            outlined
+          ></v-text-field>
+          <v-btn
+            @click="signInWithMagicLink"
+            color="primary"
+            block
+          >
+            Send Magic Link
+          </v-btn>
+          <v-alert v-if="authMessage" type="info" class="mt-3">
+            {{ authMessage }}
+          </v-alert>
+        </v-card-text>
+      </v-card>
+    </v-container>
 
     <!-- Main App Content -->
-    <div v-else>
-      <div class="header">
-        <h1>Visited</h1>
-        <div class="stats">
-          <p>{{ visitedCount }} / {{ totalCountries }} countries visited</p>
-          <p>{{ visitedPercentage }}% visited, {{ remainingPercentage }}% remaining</p>
-        </div>
-        <button @click="signOut" class="sign-out-button">Sign Out</button>
-      </div>
-      <div class="table-container">
-        <table class="countries-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Country</th>
-              <th>Visited</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(country, index) in countries" :key="country.name">
-              <td>{{ index + 1 }}</td>
-              <td>{{ country.name }}</td>
-              <td>
-                <input
-                  type="checkbox"
-                  v-model="country.visited"
-                  @change="updateVisitedStatus(country)"
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    <v-container v-else>
+      <v-card>
+        <v-toolbar color="primary" dark>
+          <v-toolbar-title>Visited</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn @click="signOut" color="error">Sign Out</v-btn>
+        </v-toolbar>
+        <v-card-text>
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-card>
+                <v-card-title>Stats</v-card-title>
+                <v-card-text>
+                  <p>{{ visitedCount }} / {{ totalCountries }} countries visited</p>
+                  <p>{{ visitedPercentage }}% visited, {{ remainingPercentage }}% remaining</p>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
+          <v-data-table
+            :headers="headers"
+            :items="countries"
+            :items-per-page="10"
+            class="elevation-1 mt-4"
+          >
+            <template v-slot:item.visited="{ item }">
+              <v-checkbox
+                v-model="item.visited"
+                @change="updateVisitedStatus(item)"
+              ></v-checkbox>
+            </template>
+          </v-data-table>
+        </v-card-text>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -62,7 +80,12 @@ export default {
       email: '',
       authMessage: '',
       user: null,
-      countries: [] // All countries with user-specific visited status
+      countries: [], // All countries with user-specific visited status
+      headers: [
+        { text: '#', value: 'index' },
+        { text: 'Country', value: 'name' },
+        { text: 'Visited', value: 'visited' },
+      ],
     };
   },
   computed: {
@@ -150,12 +173,13 @@ export default {
         if (userCountriesError) throw userCountriesError;
 
         // Merge the data
-        this.countries = allCountries.map((country) => {
+        this.countries = allCountries.map((country, index) => {
           const userCountry = userCountries.find(
             (uc) => uc.country_id === country.id
           );
           return {
             ...country,
+            index: index + 1,
             visited: userCountry ? userCountry.visited : false,
           };
         });
@@ -201,103 +225,9 @@ export default {
 }
 </script>
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+<style scoped>
 .auth-section {
   margin: 20px auto;
-  max-width: 300px;
-}
-.auth-section input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.auth-section button {
-  width: 100%;
-  padding: 10px;
-  background-color: #6a11cb;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.auth-section button:hover {
-  background-color: #2575fc;
-}
-.auth-message {
-  margin-top: 10px;
-  color: #6a11cb;
-}
-#app {
-  text-align: center;
-  color: #2c3e50;
-  padding: 20px;
-}
-.header {
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-.sign-out-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #ff4757;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.sign-out-button:hover {
-  background-color: #ff6b81;
-}
-.header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-.stats {
-  margin-top: 10px;
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-.countries-table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.countries-table th,
-.countries-table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #e0e0e0;
-}
-.countries-table th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-  position: sticky;
-  top: 0; /* Stick to the top of the table container */
-  z-index: 50;
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
-}
-
-.countries-table tr:hover {
-  background-color: #f1f3f5;
-  cursor: pointer;
-}
-
-.table-container {
-  max-height: 500px; /* Set a fixed height for the container */
-  overflow-y: auto; /* Enable vertical scrolling */
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  max-width: 400px;
 }
 </style>
