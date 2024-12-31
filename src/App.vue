@@ -71,9 +71,16 @@
             </v-col>
           </v-row>
           <div style="max-height: 70vh; overflow-y: auto;">
+            <v-text-field
+              v-model="filterText"
+              label="Filter countries"
+              outlined
+              clearable
+              class="mb-4"
+            />
             <v-data-table
               :headers="headers"
-              :items="countries"
+              :items="filteredCountries"
               :items-per-page="-1"
               class="elevation-1 mt-4"
               height="auto"
@@ -110,6 +117,7 @@ export default {
       authMessage: '',
       user: null,
       countries: [], // All countries with user-specific visited status
+      filterText: '', // New property for filter text
       headers: [
         { text: '#', value: 'index' },
         { text: 'Country', value: 'name' },
@@ -133,6 +141,14 @@ export default {
       return this.totalCountries > 0
         ? (100 - this.visitedPercentage).toFixed(2)
         : 0;
+    },
+    filteredCountries() { // New computed property
+      if (!this.filterText) {
+        return this.countries; // Return all countries if no filter text
+      }
+      return this.countries.filter(country =>
+        country.name.toLowerCase().startsWith(this.filterText.toLowerCase())
+      );
     }
   },
   async mounted() {
