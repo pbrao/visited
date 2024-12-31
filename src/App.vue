@@ -127,14 +127,8 @@
 </template>
 
 <script>
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from './supabase';
 import PieChart from './components/PieChart.vue';
-
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.VUE_APP_SUPABASE_URL,
-  process.env.VUE_APP_SUPABASE_ANON_KEY
-);
 
 export default {
   name: 'App',
@@ -215,29 +209,41 @@ export default {
     }
   },
   async mounted() {
-    // Debug headers and verify structure
-    console.log('Headers:', JSON.stringify(this.headers, null, 2));
+    try {
+      // Debug headers and verify structure
+      console.log('Headers:', JSON.stringify(this.headers, null, 2));
 
-    // Check if the user is already signed in
-    const { data: { user } } = await supabase.auth.getUser();
-    this.user = user;
+      // Check if the user is already signed in
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      if (userError) throw userError;
 
-    // Fetch countries if the user is signed in
-    if (this.user) {
-      this.fetchCountries();
-    }
-
-    // Listen for authentication events (e.g., Magic Link sign-in)
-    supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN') {
-        this.user = session.user;
-        await this.initializeCountriesForNewUser();
-        this.fetchCountries();
-      } else if (event === 'SIGNED_OUT') {
-        this.user = null;
-        this.countries = [];
+      if (user) {
+        this.user = user;
+        console.log('User authenticated:', user.id);
+        await this.fetchCountries();
+      } else {
+        console.log('No authenticated user');
       }
-    });
+
+      // Listen for authentication events (e.g., Magic Link sign-in)
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log('Auth state changed:', event);
+        if (event === 'SIGNED_IN') {
+          this.user = session.user;
+          try {
+            await this.initializeCountriesForNewUser();
+            await this.fetchCountries();
+          } catch (error) {
+            console.error('Error during sign-in initialization:', error);
+          }
+        } else if (event === 'SIGNED_OUT') {
+          this.user = null;
+          this.countries = [];
+        }
+      });
+    } catch (error) {
+      console.error('Error in mounted hook:', error);
+    }
   },
   methods: {
     async signInWithMagicLink() {
