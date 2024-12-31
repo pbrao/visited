@@ -156,12 +156,13 @@ export default {
         : 0;
     },
     filteredCountries() { // New computed property
-      if (!this.filterText) {
-        return this.countries; // Return all countries if no filter text
-      }
-      return this.countries.filter(country =>
-        country.name.toLowerCase().startsWith(this.filterText.toLowerCase())
-      );
+      const filtered = !this.filterText 
+        ? this.countries 
+        : this.countries.filter(country =>
+            country.name.toLowerCase().startsWith(this.filterText.toLowerCase())
+          );
+      console.log('Filtered Countries:', filtered); // Debugging
+      return filtered;
     },
     chartData() {
       const data = {
