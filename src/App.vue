@@ -95,22 +95,6 @@
               fixed-header
               hover
             >
-              <template v-slot:header="{ headers }">
-                <thead>
-                  <tr>
-                    <th
-                      v-for="header in headers"
-                      :key="header.value"
-                      :class="header.class"
-                      :style="{ width: header.width }"
-                    >
-                      <div class="v-data-table-header__content">
-                        <span>{{ header.text }}</span>
-                      </div>
-                    </th>
-                  </tr>
-                </thead>
-              </template>
               <template v-slot:item.visited="{ item }">
                 <v-checkbox
                   v-model="item.visited"
@@ -148,29 +132,26 @@ export default {
       countries: [], // All countries with user-specific visited status
       filterText: '', // New property for filter text
       headers: [
-        { 
-          text: '#', 
-          value: 'index', 
-          align: 'start', 
+        {
+          title: '#',
+          key: 'index',
+          align: 'start',
           sortable: false,
           width: '50px',
-          class: 'header-cell' 
         },
-        { 
-          text: 'Country Name', 
-          value: 'name', 
-          align: 'start', 
+        {
+          title: 'Country Name',
+          key: 'name',
+          align: 'start',
           sortable: false,
           width: '200px',
-          class: 'header-cell' 
         },
-        { 
-          text: 'Visited', 
-          value: 'visited', 
-          align: 'center', 
+        {
+          title: 'Visited',
+          key: 'visited',
+          align: 'center',
           sortable: false,
           width: '100px',
-          class: 'header-cell' 
         },
       ],
     };
