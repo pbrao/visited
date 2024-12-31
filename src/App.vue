@@ -85,6 +85,7 @@
               class="elevation-1 mt-4"
               height="auto"
               fixed-header
+              hover
             >
               <template v-slot:item.visited="{ item }">
                 <v-checkbox
@@ -274,5 +275,10 @@ export default {
 .auth-section {
   margin: 20px auto;
   max-width: 400px;
+}
+
+.v-data-table >>> .v-data-table__tr:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
 }
 </style>
