@@ -109,6 +109,8 @@
               </v-data-table>
             </v-col>
           </v-row>
+        </v-card-text>
+      </v-card>
     </v-container>
   </v-app>
 </template>
