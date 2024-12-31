@@ -41,7 +41,8 @@ export default {
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              display: true, // Ensure the legend is displayed
+              display: true,
+              position: 'right', // Move the legend to the right
             },
           },
         },
