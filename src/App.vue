@@ -90,13 +90,15 @@
               :headers="headers"
               :items="filteredCountries"
               :items-per-page="-1"
-              class="elevation-1 mt-4"
+              density="compact" 
+              class="elevation-1 mt-2" 
               height="auto"
               fixed-header
               hover
             >
               <template v-slot:item.visited="{ item }">
                 <v-checkbox
+                  color="indigo"
                   v-model="item.visited"
                   @change="updateVisitedStatus(item)"
                 />
@@ -324,6 +326,7 @@ export default {
   margin: 20px auto;
   max-width: 400px;
 }
+/*
 
 .v-data-table >>> .v-data-table__thead {
   position: sticky;
@@ -357,17 +360,18 @@ export default {
 }
 
 .v-data-table >>> .v-data-table__tr {
-  height: 15px !important; /* Reduced from 30px to 15px */
+  height: 15px !important; 
 }
 
 .v-data-table >>> .v-checkbox {
-  transform: scale(0.5); /* Reduced from 0.7 to 0.5 */
+  transform: scale(0.7); 
   transform-origin: left center;
 }
 
 .v-data-table >>> .v-data-table__td {
-  padding-top: 2px !important; /* Reduced from 4px to 2px */
-  padding-bottom: 2px !important; /* Reduced from 4px to 2px */
-  min-height: 15px !important; /* Added to ensure consistent height */
+  padding-top: 2px !important; 
+  padding-bottom: 2px !important; 
+  min-height: 15px !important; 
 }
+*/
 </style>
