@@ -51,7 +51,7 @@
             :items-per-page="10"
             class="elevation-1 mt-4"
           >
-            <template v-slot:item.visited="{ item }">
+            <template #item.visited="{ item }">
               <v-checkbox
                 v-model="item.visited"
                 @change="updateVisitedStatus(item)"
