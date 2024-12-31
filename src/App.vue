@@ -85,25 +85,23 @@
               class="mb-4"
             />
           </div>
-          <div style="max-height: 70vh; overflow-y: auto;">
-            <v-data-table
-              :headers="headers"
-              :items="filteredCountries"
-              :items-per-page="-1"
-              density="compact" 
-              class="elevation-1 mt-2" 
-              fixed-header
-              hover
-            >
-              <template v-slot:item.visited="{ item }">
-                <v-checkbox
-                  color="indigo"
-                  v-model="item.visited"
-                  @change="updateVisitedStatus(item)"
-                />
-              </template>
-            </v-data-table>
-          </div>
+          <v-data-table
+            :headers="headers"
+            :items="filteredCountries"
+            :items-per-page="-1"
+            density="compact"
+            hover
+            fixed-header
+          >
+            <template v-slot:item.visited="{ item }">
+              <v-checkbox
+                color="indigo"
+                v-model="item.visited"
+                @change="updateVisitedStatus(item)"
+                density="compact"
+              />
+            </template>
+          </v-data-table>
         </v-card-text>
       </v-card>
     </v-container>
