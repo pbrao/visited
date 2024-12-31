@@ -1,7 +1,10 @@
 <template>
   <v-app>
     <!-- Authentication Section -->
-    <v-container v-if="!user" class="auth-section">
+    <v-container
+      v-if="!user"
+      class="auth-section"
+    >
       <v-card
         class="mx-auto"
         max-width="400"
@@ -23,7 +26,11 @@
           >
             Send Magic Link
           </v-btn>
-          <v-alert v-if="authMessage" type="info" class="mt-3">
+          <v-alert
+            v-if="authMessage"
+            type="info"
+            class="mt-3"
+          >
             {{ authMessage }}
           </v-alert>
         </v-card-text>
@@ -33,9 +40,12 @@
     <!-- Main App Content -->
     <v-container v-else>
       <v-card>
-        <v-toolbar color="primary" dark>
+        <v-toolbar
+          color="primary"
+          dark
+        >
           <v-toolbar-title>Visited</v-toolbar-title>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn
             color="error"
             @click="signOut"
@@ -45,7 +55,10 @@
         </v-toolbar>
         <v-card-text>
           <v-row>
-            <v-col cols="12" md="6">
+            <v-col
+              cols="12"
+              md="6"
+            >
               <v-card>
                 <v-card-title>
                   Stats
@@ -68,7 +81,7 @@
               <v-checkbox
                 v-model="item.visited"
                 @change="updateVisitedStatus(item)"
-              ></v-checkbox>
+              />
             </template>
           </v-data-table>
         </v-card-text>
