@@ -78,20 +78,24 @@
               </v-card>
             </v-col>
           </v-row>
+          
+          <!-- Sticky Filter -->
+          <div class="sticky-filter">
+            <v-text-field
+              v-model="filterText"
+              label="Filter countries"
+              outlined
+              clearable
+              class="mb-4"
+            />
+          </div>
         </div>
 
         <!-- Scrollable Content -->
         <v-card-text class="scrollable-content">
-          <!-- Filter and Table Section -->
+          <!-- Table Section -->
           <v-row>
             <v-col cols="12">
-              <v-text-field
-                v-model="filterText"
-                label="Filter countries"
-                outlined
-                clearable
-                class="mb-4"
-              />
               <v-data-table
                 :headers="headers"
                 :items="filteredCountries"
@@ -352,8 +356,14 @@ export default {
   margin: 0;
 }
 
+.sticky-filter {
+  padding: 0 16px;
+  background: white;
+  margin-top: -16px;
+}
+
 .scrollable-content {
-  height: calc(100vh - 64px - 200px);
+  height: calc(100vh - 64px - 200px - 80px);
   overflow-y: auto;
   padding: 16px;
 }
