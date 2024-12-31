@@ -103,6 +103,8 @@
                 density="compact"
                 hover
                 fixed-header
+                height="calc(100vh - 64px - 200px - 80px - 32px)"
+                class="fixed-header-table"
               >
                 <template v-slot:item.visited="{ item }">
                   <v-checkbox-btn
@@ -366,6 +368,36 @@ export default {
   height: calc(100vh - 64px - 200px - 80px);
   overflow-y: auto;
   padding: 16px;
+}
+
+.fixed-header-table {
+  /* Remove default table border */
+  border: none !important;
+}
+
+/* Style for the fixed header */
+.fixed-header-table :deep(.v-data-table__wrapper) {
+  /* Enable scrolling for table content */
+  overflow-y: auto;
+}
+
+.fixed-header-table :deep(.v-data-table__header) {
+  /* Ensure header stays on top */
+  position: sticky !important;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+}
+
+/* Optional: Add shadow under the fixed header */
+.fixed-header-table :deep(.v-data-table__header)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
 }
 
 .sticky-wrapper::after {
