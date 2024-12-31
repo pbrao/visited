@@ -70,20 +70,23 @@
               </v-card>
             </v-col>
           </v-row>
-          <v-data-table
-            :headers="headers"
-            :items="countries"
-            :items-per-page="10"
-            class="elevation-1 mt-4"
-          >
-            <!-- eslint-disable-next-line vue/valid-v-slot -->
-            <template #item.visited="{ item }">
-              <v-checkbox
-                v-model="item.visited"
-                @change="updateVisitedStatus(item)"
-              />
-            </template>
-          </v-data-table>
+          <div style="max-height: 70vh; overflow-y: auto;">
+            <v-data-table
+              :headers="headers"
+              :items="countries"
+              :items-per-page="-1"
+              class="elevation-1 mt-4"
+              height="auto"
+              fixed-header
+            >
+              <template #item.visited="{ item }">
+                <v-checkbox
+                  v-model="item.visited"
+                  @change="updateVisitedStatus(item)"
+                />
+              </template>
+            </v-data-table>
+          </div>
         </v-card-text>
       </v-card>
     </v-container>
