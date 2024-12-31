@@ -95,6 +95,22 @@
               fixed-header
               hover
             >
+              <template v-slot:header="{ headers }">
+                <thead>
+                  <tr>
+                    <th
+                      v-for="header in headers"
+                      :key="header.value"
+                      :class="header.class"
+                      :style="{ width: header.width }"
+                    >
+                      <div class="v-data-table-header__content">
+                        <span>{{ header.text }}</span>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+              </template>
               <template v-slot:item.visited="{ item }">
                 <v-checkbox
                   v-model="item.visited"
