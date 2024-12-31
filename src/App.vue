@@ -70,7 +70,6 @@
                 <v-card-text>
                   <PieChart
                     v-if="chartData.datasets[0].data.length > 0 && chartData.datasets[0].data[0] !== 0 && chartData.datasets[0].data[1] !== 0"
-                    title="Visited Countries"
                     :data="chartData"
                   />
                 </v-card-text>

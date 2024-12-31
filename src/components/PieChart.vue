@@ -1,6 +1,5 @@
 <template>
   <v-card>
-    <v-card-title>{{ title }}</v-card-title>
     <v-card-text>
       <div class="chart-container">
         <canvas ref="pieChart" width="200" height="200"></canvas>
@@ -16,10 +15,6 @@ Chart.register(...registerables);
 export default {
   name: 'PieChart',
   props: {
-    title: {
-      type: String,
-      default: 'Pie Chart',
-    },
     data: {
       type: Object,
       required: true,
