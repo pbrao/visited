@@ -54,9 +54,9 @@
           </v-btn>
         </v-toolbar>
         <v-card-text>
-          <v-row>
-            <v-col cols="12" md="6">
-              <v-card>
+          <v-row class="sticky-row">
+            <v-col cols="12" md="6" class="sticky-col">
+              <v-card class="sticky-card">
                 <v-card-title>Stats</v-card-title>
                 <v-card-text>
                   <p>{{ visitedCount }} / {{ totalCountries }} Countries Visited</p>
@@ -64,8 +64,8 @@
                 </v-card-text>
               </v-card>
             </v-col>
-            <v-col cols="12" md="6">
-              <v-card>
+            <v-col cols="12" md="6" class="sticky-col">
+              <v-card class="sticky-card">
                 <v-card-title>Visited Countries</v-card-title>
                 <v-card-text>
                   <PieChart
@@ -324,5 +324,23 @@ export default {
 .auth-section {
   margin: 20px auto;
   max-width: 400px;
+}
+
+.sticky-row {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: white;
+  padding-bottom: 16px;
+}
+
+.sticky-col {
+  position: sticky;
+  top: 0;
+}
+
+.sticky-card {
+  position: sticky;
+  top: 0;
 }
 </style>
