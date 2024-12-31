@@ -35,8 +35,6 @@
           </v-alert>
         </v-card-text>
       </v-card>
-        </v-card-text>
-      </v-card>
     </v-container>
 
     <!-- Main App Content -->
