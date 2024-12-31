@@ -180,6 +180,9 @@ export default {
     }
   },
   async mounted() {
+    // Debug headers
+    console.log('Headers:', this.headers);
+
     // Check if the user is already signed in
     const { data: { user } } = await supabase.auth.getUser();
     this.user = user;
