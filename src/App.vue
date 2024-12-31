@@ -38,7 +38,7 @@
     </v-container>
 
     <!-- Main App Content -->
-    <v-container v-else>
+    <v-container v-else class="main-container">
       <v-card>
         <v-toolbar
           color="primary"
@@ -53,8 +53,9 @@
             Sign Out
           </v-btn>
         </v-toolbar>
-        <v-card-text>
-          <!-- Sticky Section -->
+        
+        <!-- Sticky Section -->
+        <div class="sticky-wrapper">
           <v-row class="sticky-section">
             <v-col cols="12" md="6">
               <v-card>
@@ -77,7 +78,10 @@
               </v-card>
             </v-col>
           </v-row>
+        </div>
 
+        <!-- Scrollable Content -->
+        <v-card-text class="scrollable-content">
           <!-- Filter and Table Section -->
           <v-row>
             <v-col cols="12">
@@ -331,12 +335,36 @@ export default {
   max-width: 400px;
 }
 
-.sticky-section {
+.main-container {
+  height: 100vh;
+  padding: 0;
+}
+
+.sticky-wrapper {
   position: sticky;
   top: 0;
   z-index: 2;
   background: white;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
+}
+
+.sticky-section {
+  padding: 16px;
+  margin: 0;
+}
+
+.scrollable-content {
+  height: calc(100vh - 64px - 200px);
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.sticky-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), transparent);
 }
 </style>
