@@ -170,7 +170,7 @@ export default {
           {
             label: 'Countries',
             data: [this.visitedCount, this.totalCountries - this.visitedCount],
-            backgroundColor: ['#1976D2', '#FF5252'],
+            backgroundColor: ['#1976D2', '#90EE90'], // Updated to light green for "Remaining"
           },
         ],
       };
