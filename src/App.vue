@@ -2,19 +2,24 @@
   <v-app>
     <!-- Authentication Section -->
     <v-container v-if="!user" class="auth-section">
-      <v-card class="mx-auto" max-width="400">
-        <v-card-title class="text-center">Sign In with Magic Link</v-card-title>
+      <v-card
+        class="mx-auto"
+        max-width="400"
+      >
+        <v-card-title class="text-center">
+          Sign In with Magic Link
+        </v-card-title>
         <v-card-text>
           <v-text-field
             v-model="email"
             label="Enter your email"
             type="email"
             outlined
-          ></v-text-field>
+          />
           <v-btn
-            @click="signInWithMagicLink"
             color="primary"
             block
+            @click="signInWithMagicLink"
           >
             Send Magic Link
           </v-btn>
@@ -31,13 +36,20 @@
         <v-toolbar color="primary" dark>
           <v-toolbar-title>Visited</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn @click="signOut" color="error">Sign Out</v-btn>
+          <v-btn
+            color="error"
+            @click="signOut"
+          >
+            Sign Out
+          </v-btn>
         </v-toolbar>
         <v-card-text>
           <v-row>
             <v-col cols="12" md="6">
               <v-card>
-                <v-card-title>Stats</v-card-title>
+                <v-card-title>
+                  Stats
+                </v-card-title>
                 <v-card-text>
                   <p>{{ visitedCount }} / {{ totalCountries }} countries visited</p>
                   <p>{{ visitedPercentage }}% visited, {{ remainingPercentage }}% remaining</p>
