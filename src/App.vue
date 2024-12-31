@@ -132,9 +132,27 @@ export default {
       countries: [], // All countries with user-specific visited status
       filterText: '', // New property for filter text
       headers: [
-        { text: '#', value: 'index', align: 'start', sortable: false },
-        { text: 'Country Name', value: 'name', align: 'start', sortable: false },
-        { text: 'Visited', value: 'visited', align: 'center', sortable: false },
+        { 
+          text: '#', 
+          value: 'index', 
+          align: 'start', 
+          sortable: false,
+          width: '50px' 
+        },
+        { 
+          text: 'Country Name', 
+          value: 'name', 
+          align: 'start', 
+          sortable: false,
+          width: '200px' 
+        },
+        { 
+          text: 'Visited', 
+          value: 'visited', 
+          align: 'center', 
+          sortable: false,
+          width: '100px' 
+        },
       ],
     };
   },
