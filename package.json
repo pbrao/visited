@@ -10,13 +10,12 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@supabase/supabase-js": "^2.47.10",
+    "chart.js": "^4.4.7",
     "core-js": "^3.8.3",
     "node-polyfill-webpack-plugin": "^4.1.0",
     "sql.js": "^1.12.0",
     "vue": "^3.2.13",
-    "vuetify": "^3.7.6",
-    "chart.js": "^4.4.1",
-    "vue-chartjs": "^5.3.2"
+    "vuetify": "^3.7.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -40,7 +39,12 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "vue/valid-v-slot": ["error", { "allowModifiers": true }]
+      "vue/valid-v-slot": [
+        "error",
+        {
+          "allowModifiers": true
+        }
+      ]
     }
   },
   "browserslist": [
