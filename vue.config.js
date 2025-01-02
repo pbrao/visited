@@ -3,6 +3,15 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 
 module.exports = defineConfig({
   transpileDependencies: true,
+  css: {
+    loaderOptions: {
+      sass: {
+        additionalData: `
+          @import "@/assets/styles/_variables.scss";
+        `
+      }
+    }
+  },
   configureWebpack: {
     plugins: [
       new NodePolyfillPlugin()
