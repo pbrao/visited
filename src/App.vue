@@ -127,6 +127,7 @@
 </template>
 
 <script>
+import '@/assets/styles/main.scss'
 import { supabase } from './supabase';
 import PieChart from './components/PieChart.vue';
 
@@ -400,7 +401,3 @@ export default {
 }
 </script>
 
-<script>
-import '@/assets/styles/main.scss'
-// ... rest of your existing script
-</script>
