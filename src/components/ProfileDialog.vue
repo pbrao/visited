@@ -18,11 +18,11 @@
             v-model="countryOfOrigin"
             :items="countries"
             :loading="loadingCountries"
-            :search-input.sync="searchCountry"
+            v-model:search="searchCountry"
             label="Country of Origin"
             required
             clearable
-            @update:search-input="fetchCountries"
+            @update:search="fetchCountries"
             @focus="fetchCountries"
           >
             <template v-slot:no-data>
