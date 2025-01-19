@@ -9,16 +9,42 @@
       <v-spacer />
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" temporary>
-      <v-list>
-        <v-list-item @click="profileDialog = true">
-          <v-list-item-title>Edit Profile</v-list-item-title>
-        </v-list-item>
-        <v-list-item @click="signOut">
-          <v-list-item-title>Sign Out</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    <v-menu
+      v-model="menu"
+      :close-on-content-click="false"
+      location="end"
+    >
+      <template v-slot:activator="{ props }">
+        <v-app-bar-nav-icon v-bind="props" />
+      </template>
+
+      <v-card min-width="200">
+        <v-list>
+          <v-list-item
+            v-if="profile"
+            :title="profile.first_name"
+            :subtitle="profile.country_of_origin"
+          >
+            <template v-slot:prepend>
+              <v-avatar color="primary">
+                <span class="text-h6">{{ profile.first_name?.charAt(0) }}</span>
+              </v-avatar>
+            </template>
+          </v-list-item>
+        </v-list>
+
+        <v-divider />
+
+        <v-list>
+          <v-list-item @click="profileDialog = true">
+            <v-list-item-title>Edit Profile</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="signOut">
+            <v-list-item-title>Sign Out</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-menu>
 
     <ProfileDialog
       v-model:profile="profile"
@@ -136,7 +162,7 @@ export default {
       authMessage: '',
       user: null,
       profile: null,
-      drawer: false,
+      menu: false,
       profileDialog: false,
       countries: [], // All countries with user-specific visited status
       filterText: '', // New property for filter text
