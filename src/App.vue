@@ -7,13 +7,15 @@
         {{ profile?.first_name ? `Welcome, ${profile.first_name}` : 'Visited' }}
       </v-toolbar-title>
       <v-spacer />
-      <v-btn color="error" @click="signOut">Sign Out</v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" temporary>
       <v-list>
         <v-list-item @click="profileDialog = true">
           <v-list-item-title>Edit Profile</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="signOut">
+          <v-list-item-title>Sign Out</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -69,12 +71,6 @@
         >
           <v-toolbar-title>Visited</v-toolbar-title>
           <v-spacer />
-          <v-btn
-            color="error"
-            @click="signOut"
-          >
-            Sign Out
-          </v-btn>
         </v-toolbar>
         
         <!-- Sticky Section -->
