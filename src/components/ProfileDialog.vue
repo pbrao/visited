@@ -46,11 +46,13 @@ import { profiles, supabase } from '../supabase';
 export default {
   props: {
     user: Object,
-    profile: Object
+    profile: Object,
+    modelValue: Boolean
   },
+  emits: ['update:modelValue', 'update:profile'],
   data() {
     return {
-      dialog: false,
+      dialog: this.modelValue,
       firstName: this.profile?.first_name || '',
       lastName: this.profile?.last_name || '',
       countryOfOrigin: this.profile?.country_of_origin || '',
@@ -58,6 +60,14 @@ export default {
       loadingCountries: false,
       searchCountry: ''
     };
+  },
+  watch: {
+    modelValue(newVal) {
+      this.dialog = newVal;
+    },
+    dialog(newVal) {
+      this.$emit('update:modelValue', newVal);
+    }
   },
   methods: {
     async fetchCountries(search = '') {
