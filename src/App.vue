@@ -91,12 +91,11 @@
 
                 <v-card class="mt-4 flex-grow-1">
                   <v-card-title>Filter By</v-card-title>
-                  <v-card-text class="d-flex flex-column justify-center" style="height: 100%;">
+                  <v-card-text class="d-flex flex-column" style="height: 100%; padding-top: 16px;">
                     <v-btn-toggle
                       v-model="filterStatus"
                       color="primary"
                       mandatory
-                      class="mt-2"
                     >
                       <v-btn value="all">
                         All
