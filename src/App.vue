@@ -2,49 +2,54 @@
   <v-app>
     <!-- Authentication Section -->
     <v-app-bar v-if="user" color="primary" dark>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
       <v-toolbar-title>
         {{ profile?.first_name ? `Welcome, ${profile.first_name}` : 'Visited' }}
       </v-toolbar-title>
       <v-spacer />
-    </v-app-bar>
 
-    <v-menu
-      v-model="menu"
-      :close-on-content-click="false"
-      location="end"
-    >
-      <template v-slot:activator="{ props }">
-        <v-app-bar-nav-icon v-bind="props" />
-      </template>
-
-      <v-card min-width="200">
-        <v-list>
-          <v-list-item
-            v-if="profile"
-            :title="profile.first_name"
-            :subtitle="profile.country_of_origin"
+      <!-- Move menu to the right side -->
+      <v-menu
+        v-model="menu"
+        :close-on-content-click="true"
+        location="bottom end"
+      >
+        <template v-slot:activator="{ props }">
+          <v-btn
+            icon
+            v-bind="props"
           >
-            <template v-slot:prepend>
-              <v-avatar color="primary">
-                <span class="text-h6">{{ profile.first_name?.charAt(0) }}</span>
-              </v-avatar>
-            </template>
-          </v-list-item>
-        </v-list>
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+        </template>
 
-        <v-divider />
+        <v-card min-width="200">
+          <v-list>
+            <v-list-item
+              v-if="profile"
+              :title="profile.first_name"
+              :subtitle="profile.country_of_origin"
+            >
+              <template v-slot:prepend>
+                <v-avatar color="primary">
+                  <span class="text-h6">{{ profile.first_name?.charAt(0) }}</span>
+                </v-avatar>
+              </template>
+            </v-list-item>
+          </v-list>
 
-        <v-list>
-          <v-list-item @click="profileDialog = true">
-            <v-list-item-title>Edit Profile</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="signOut">
-            <v-list-item-title>Sign Out</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </v-menu>
+          <v-divider />
+
+          <v-list>
+            <v-list-item @click="profileDialog = true">
+              <v-list-item-title>Edit Profile</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="signOut">
+              <v-list-item-title>Sign Out</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-menu>
+    </v-app-bar>
 
     <ProfileDialog
       v-model:profile="profile"
