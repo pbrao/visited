@@ -14,11 +14,25 @@
             label="Last Name"
             required
           />
-          <v-text-field
+          <v-autocomplete
             v-model="countryOfOrigin"
+            :items="countries"
+            :loading="loadingCountries"
+            :search-input.sync="searchCountry"
             label="Country of Origin"
             required
-          />
+            clearable
+            @update:search-input="fetchCountries"
+            @focus="fetchCountries"
+          >
+            <template v-slot:no-data>
+              <v-list-item>
+                <v-list-item-title>
+                  Start typing to search countries...
+                </v-list-item-title>
+              </v-list-item>
+            </template>
+          </v-autocomplete>
           <v-btn type="submit" color="primary">Save</v-btn>
         </v-form>
       </v-card-text>
@@ -27,7 +41,7 @@
 </template>
 
 <script>
-import { profiles } from '../supabase';
+import { profiles, supabase } from '../supabase';
 
 export default {
   props: {
@@ -39,10 +53,30 @@ export default {
       dialog: false,
       firstName: this.profile?.first_name || '',
       lastName: this.profile?.last_name || '',
-      countryOfOrigin: this.profile?.country_of_origin || ''
+      countryOfOrigin: this.profile?.country_of_origin || '',
+      countries: [],
+      loadingCountries: false,
+      searchCountry: ''
     };
   },
   methods: {
+    async fetchCountries(search = '') {
+      try {
+        this.loadingCountries = true;
+        const { data, error } = await supabase
+          .from('countries')
+          .select('name')
+          .ilike('name', `%${search}%`)
+          .limit(10);
+
+        if (error) throw error;
+        this.countries = data.map(c => c.name);
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+      } finally {
+        this.loadingCountries = false;
+      }
+    },
     async saveProfile() {
       try {
         const { error } = await profiles.upsert({
