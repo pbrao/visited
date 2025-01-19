@@ -36,17 +36,18 @@
 }
 
 .scrollable-content {
-  height: calc(100vh - 64px - 280px);
-  overflow: hidden;
+  height: auto;
   padding: $spacing;
+  overflow: visible;
 }
 
 .fixed-header-table {
   border: none !important;
+  height: 100%;
 
   :deep(.v-data-table__wrapper) {
-    overflow-y: auto;
-    height: calc(100vh - 64px - 280px - 48px);
+    overflow-y: scroll !important;
+    height: calc(100vh - 500px) !important;
   }
 
   :deep(.v-data-table__header) {
