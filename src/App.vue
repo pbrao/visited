@@ -60,7 +60,6 @@
           </v-alert>
         </v-card-text>
       </v-card>
-      </div>
     </v-container>
 
     <!-- Main App Content -->
