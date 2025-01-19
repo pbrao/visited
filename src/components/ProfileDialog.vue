@@ -64,9 +64,24 @@ export default {
   watch: {
     modelValue(newVal) {
       this.dialog = newVal;
+      if (newVal) {
+        // When dialog opens, populate fields with current profile data
+        this.firstName = this.profile?.first_name || '';
+        this.lastName = this.profile?.last_name || '';
+        this.countryOfOrigin = this.profile?.country_of_origin || '';
+      }
     },
     dialog(newVal) {
       this.$emit('update:modelValue', newVal);
+    },
+    profile: {
+      immediate: true,
+      handler(newProfile) {
+        // Update fields when profile prop changes
+        this.firstName = newProfile?.first_name || '';
+        this.lastName = newProfile?.last_name || '';
+        this.countryOfOrigin = newProfile?.country_of_origin || '';
+      }
     }
   },
   methods: {
