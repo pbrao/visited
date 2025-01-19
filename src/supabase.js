@@ -8,6 +8,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const profiles = supabase.from('profiles')
 
 // Test the connection
 supabase.auth.getSession().then(({ error }) => {

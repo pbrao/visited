@@ -1,6 +1,29 @@
 <template>
   <v-app>
     <!-- Authentication Section -->
+    <v-app-bar v-if="user" color="primary" dark>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <v-toolbar-title>
+        {{ profile?.first_name ? `Welcome, ${profile.first_name}` : 'Visited' }}
+      </v-toolbar-title>
+      <v-spacer />
+      <v-btn color="error" @click="signOut">Sign Out</v-btn>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" temporary>
+      <v-list>
+        <v-list-item @click="profileDialog = true">
+          <v-list-item-title>Edit Profile</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <ProfileDialog
+      v-model:profile="profile"
+      :user="user"
+      v-model="profileDialog"
+    />
+
     <v-container
       v-if="!user"
       class="auth-section"
@@ -128,19 +151,24 @@
 
 <script>
 import '@/assets/styles/main.scss'
-import { supabase } from './supabase';
+import { supabase, profiles } from './supabase';
 import PieChart from './components/PieChart.vue';
+import ProfileDialog from './components/ProfileDialog.vue';
 
 export default {
   name: 'App',
   components: {
-    PieChart
+    PieChart,
+    ProfileDialog
   },
   data() {
     return {
       email: '',
       authMessage: '',
       user: null,
+      profile: null,
+      drawer: false,
+      profileDialog: false,
       countries: [], // All countries with user-specific visited status
       filterText: '', // New property for filter text
       headers: [
@@ -221,6 +249,7 @@ export default {
       if (user) {
         this.user = user;
         console.log('User authenticated:', user.id);
+        await this.fetchProfile();
         await this.fetchCountries();
       } else {
         console.log('No authenticated user');
@@ -263,6 +292,20 @@ export default {
         this.authMessage = 'Error sending magic link: ' + error.message;
       }
     },
+    async fetchProfile() {
+      try {
+        const { data, error } = await profiles
+          .select('*')
+          .eq('id', this.user.id)
+          .single();
+          
+        if (error) throw error;
+        this.profile = data;
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    },
+
     async signOut() {
       try {
         const { error } = await supabase.auth.signOut();
