@@ -94,7 +94,6 @@
                   density="compact"
                   hover
                   fixed-header
-                  height="calc(100vh - 64px - 200px - 80px - 32px)"
                   class="fixed-header-table"
                   hide-default-footer
                 >
