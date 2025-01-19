@@ -9,10 +9,10 @@
 }
 
 .sticky-wrapper {
-  position: relative; // Changed from sticky
-  z-index: 1; // Lower z-index than header
+  position: relative;
+  z-index: 1;
   background: $background-color;
-  margin-top: $header-height; // Add margin to push content below header
+  margin-top: calc(#{$header-height} + 20px); // Added 20px extra space
 
   &::after {
     content: '';
@@ -37,9 +37,10 @@
 }
 
 .scrollable-content {
-  height: calc(100vh - #{$header-height} - #{$sticky-section-height} - #{$filter-height} - #{$header-height});
+  height: calc(100vh - #{$header-height} - #{$sticky-section-height} - #{$filter-height} - 20px); // Adjusted height
   overflow-y: auto;
   padding: $spacing;
+  margin-top: 20px; // Added margin
 }
 
 .fixed-header-table {
@@ -51,7 +52,7 @@
 
   :deep(.v-data-table__header) {
     position: sticky !important;
-    top: $header-height; // Add header height offset
+    top: calc(#{$header-height} + 20px); // Added 20px offset
     z-index: 1;
     background-color: $background-color;
 
