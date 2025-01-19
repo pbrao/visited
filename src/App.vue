@@ -86,13 +86,18 @@
                   <v-card-text>
                     <p>{{ visitedCount }} / {{ totalCountries }} Countries Visited</p>
                     <p>{{ visitedPercentage }}% Visited, {{ remainingPercentage }}% Remaining</p>
-                    
-                    <!-- Add filter buttons -->
+                  </v-card-text>
+                </v-card>
+
+                <!-- New filter card -->
+                <v-card class="mt-4">
+                  <v-card-title>Filter By</v-card-title>
+                  <v-card-text>
                     <v-btn-toggle
                       v-model="filterStatus"
                       color="primary"
                       mandatory
-                      class="mt-4"
+                      class="mt-2"
                     >
                       <v-btn value="all">
                         All
