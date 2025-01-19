@@ -64,12 +64,6 @@ export default {
   watch: {
     modelValue(newVal) {
       this.dialog = newVal;
-      if (newVal) {
-        // When dialog opens, populate fields with current profile data
-        this.firstName = this.profile?.first_name || '';
-        this.lastName = this.profile?.last_name || '';
-        this.countryOfOrigin = this.profile?.country_of_origin || '';
-      }
     },
     dialog(newVal) {
       this.$emit('update:modelValue', newVal);
@@ -104,16 +98,20 @@ export default {
     },
     async saveProfile() {
       try {
-        const { error } = await profiles.upsert({
+        const { data, error } = await profiles.upsert({
           id: this.user.id,
           first_name: this.firstName,
           last_name: this.lastName,
           country_of_origin: this.countryOfOrigin
+        }, {
+          onConflict: 'id' // Ensure we update the existing profile
         });
 
         if (error) throw error;
         
+        // Emit the updated profile data
         this.$emit('update:profile', {
+          id: this.user.id,
           first_name: this.firstName,
           last_name: this.lastName,
           country_of_origin: this.countryOfOrigin
@@ -122,6 +120,7 @@ export default {
         this.dialog = false;
       } catch (error) {
         console.error('Error saving profile:', error);
+        alert('Failed to save profile. Please try again.');
       }
     }
   }
