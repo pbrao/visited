@@ -98,7 +98,7 @@ export default {
     },
     async saveProfile() {
       try {
-        const { data, error } = await profiles.upsert({
+        const { error } = await profiles.upsert({
           id: this.user.id,
           first_name: this.firstName,
           last_name: this.lastName,
