@@ -26,38 +26,13 @@
       v-model="profileDialog"
     />
 
-    <v-container
-      v-if="!user"
-      class="auth-section"
-    >
-      <v-card
-        class="mx-auto"
-        max-width="400"
-      >
-        <v-card-title class="text-center">
-          Sign In with Magic Link
-        </v-card-title>
+    <v-container v-if="!user" class="auth-section">
+      <v-card class="mx-auto" max-width="400">
+        <v-card-title class="text-center">Sign In with Magic Link</v-card-title>
         <v-card-text>
-          <v-text-field
-            v-model="email"
-            label="Enter your email"
-            type="email"
-            outlined
-          />
-          <v-btn
-            color="primary"
-            block
-            @click="signInWithMagicLink"
-          >
-            Send Magic Link
-          </v-btn>
-          <v-alert
-            v-if="authMessage"
-            type="info"
-            class="mt-3"
-          >
-            {{ authMessage }}
-          </v-alert>
+          <v-text-field v-model="email" label="Enter your email" type="email" outlined />
+          <v-btn color="primary" block @click="signInWithMagicLink">Send Magic Link</v-btn>
+          <v-alert v-if="authMessage" type="info" class="mt-3">{{ authMessage }}</v-alert>
         </v-card-text>
       </v-card>
     </v-container>
@@ -66,82 +41,79 @@
     <v-container v-else class="main-container">
       <div class="content-wrapper">
         <v-card>
-          <v-toolbar
-            color="primary"
-            dark
-          >
+          <v-toolbar color="primary" dark>
             <v-toolbar-title>Visited</v-toolbar-title>
             <v-spacer />
           </v-toolbar>
-        
-        <!-- Sticky Section -->
-        <div class="sticky-wrapper">
-          <v-row class="sticky-section">
-            <v-col cols="12" md="6">
-              <v-card>
-                <v-card-title>Stats</v-card-title>
-                <v-card-text>
-                  <p>{{ visitedCount }} / {{ totalCountries }} Countries Visited</p>
-                  <p>{{ visitedPercentage }}% Visited, {{ remainingPercentage }}% Remaining</p>
-                </v-card-text>
-              </v-card>
-            </v-col>
-            <v-col cols="12" md="6">
-              <v-card>
-                <v-card-title>Visited Countries</v-card-title>
-                <v-card-text>
-                  <PieChart
-                    v-if="chartData.datasets[0].data.length > 0 && chartData.datasets[0].data[0] !== 0 && chartData.datasets[0].data[1] !== 0"
-                    :data="chartData"
-                  />
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
-          
-          <!-- Sticky Filter -->
-          <div class="sticky-filter">
-            <v-text-field
-              v-model="filterText"
-              label="Filter countries"
-              outlined
-              clearable
-              class="mb-4"
-            />
-          </div>
-        </div>
 
-        <!-- Scrollable Content -->
-        <v-card-text class="scrollable-content">
-          <!-- Table Section -->
-          <v-row>
-            <v-col cols="12">
-              <v-data-table
-                :headers="headers"
-                :items="filteredCountries"
-                :items-per-page="-1"
-                density="compact"
-                hover
-                fixed-header
-                height="calc(100vh - 64px - 200px - 80px - 32px)"
-                class="fixed-header-table"
-                hide-default-footer
-              >
-                <template v-slot:item.visited="{ item }">
-                  <v-checkbox-btn
-                    inline
-                    color="indigo"
-                    v-model="item.visited"
-                    @change="updateVisitedStatus(item)"
-                    density="compact"
-                    :align="center"
-                  />
-                </template>
-              </v-data-table>
-            </v-col>
-          </v-row>
-        </v-card-text>
-      </v-card>
+          <!-- Sticky Section -->
+          <div class="sticky-wrapper">
+            <v-row class="sticky-section">
+              <v-col cols="12" md="6">
+                <v-card>
+                  <v-card-title>Stats</v-card-title>
+                  <v-card-text>
+                    <p>{{ visitedCount }} / {{ totalCountries }} Countries Visited</p>
+                    <p>{{ visitedPercentage }}% Visited, {{ remainingPercentage }}% Remaining</p>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-card>
+                  <v-card-title>Visited Countries</v-card-title>
+                  <v-card-text>
+                    <PieChart
+                      v-if="chartData.datasets[0].data.length > 0 && chartData.datasets[0].data[0] !== 0 && chartData.datasets[0].data[1] !== 0"
+                      :data="chartData"
+                    />
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+
+            <!-- Sticky Filter -->
+            <div class="sticky-filter">
+              <v-text-field
+                v-model="filterText"
+                label="Filter countries"
+                outlined
+                clearable
+                class="mb-4"
+              />
+            </div>
+          </div>
+
+          <!-- Scrollable Content -->
+          <v-card-text class="scrollable-content">
+            <v-row>
+              <v-col cols="12">
+                <v-data-table
+                  :headers="headers"
+                  :items="filteredCountries"
+                  :items-per-page="-1"
+                  density="compact"
+                  hover
+                  fixed-header
+                  height="calc(100vh - 64px - 200px - 80px - 32px)"
+                  class="fixed-header-table"
+                  hide-default-footer
+                >
+                  <template v-slot:item.visited="{ item }">
+                    <v-checkbox-btn
+                      inline
+                      color="indigo"
+                      v-model="item.visited"
+                      @change="updateVisitedStatus(item)"
+                      density="compact"
+                      :align="center"
+                    />
+                  </template>
+                </v-data-table>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </div>
     </v-container>
   </v-app>
 </template>
