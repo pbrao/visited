@@ -60,18 +60,20 @@
           </v-alert>
         </v-card-text>
       </v-card>
+      </div>
     </v-container>
 
     <!-- Main App Content -->
     <v-container v-else class="main-container">
-      <v-card>
-        <v-toolbar
-          color="primary"
-          dark
-        >
-          <v-toolbar-title>Visited</v-toolbar-title>
-          <v-spacer />
-        </v-toolbar>
+      <div class="content-wrapper">
+        <v-card>
+          <v-toolbar
+            color="primary"
+            dark
+          >
+            <v-toolbar-title>Visited</v-toolbar-title>
+            <v-spacer />
+          </v-toolbar>
         
         <!-- Sticky Section -->
         <div class="sticky-wrapper">

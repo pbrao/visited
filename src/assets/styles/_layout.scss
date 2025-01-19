@@ -3,6 +3,10 @@
   max-width: 400px;
 }
 
+.content-wrapper {
+  padding-top: 64px;
+}
+
 .main-container {
   height: 100vh;
   padding: 0;
@@ -12,7 +16,7 @@
   position: relative;
   z-index: 1;
   background: $background-color;
-  margin-top: calc(#{$header-height} + 20px); // Added 20px extra space
+  margin-top: $spacing;
 
   &::after {
     content: '';
@@ -37,10 +41,9 @@
 }
 
 .scrollable-content {
-  height: calc(100vh - #{$header-height} - #{$sticky-section-height} - #{$filter-height} - 20px); // Adjusted height
+  height: calc(100vh - 64px - #{$sticky-section-height} - #{$filter-height} - #{$spacing});
   overflow-y: auto;
   padding: $spacing;
-  margin-top: 20px; // Added margin
 }
 
 .fixed-header-table {
@@ -52,7 +55,7 @@
 
   :deep(.v-data-table__header) {
     position: sticky !important;
-    top: calc(#{$header-height} + 20px); // Added 20px offset
+    top: 0;
     z-index: 1;
     background-color: $background-color;
 
