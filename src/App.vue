@@ -79,8 +79,8 @@
 
           <!-- Sticky Section -->
           <div class="sticky-wrapper">
-            <v-row class="sticky-section">
-              <v-col cols="12" md="6">
+            <v-row class="sticky-section" style="align-items: stretch;">
+              <v-col cols="12" md="6" class="d-flex flex-column">
                 <v-card>
                   <v-card-title>Stats</v-card-title>
                   <v-card-text>
@@ -89,10 +89,9 @@
                   </v-card-text>
                 </v-card>
 
-                <!-- New filter card -->
-                <v-card class="mt-4">
+                <v-card class="mt-4 flex-grow-1">
                   <v-card-title>Filter By</v-card-title>
-                  <v-card-text>
+                  <v-card-text class="d-flex flex-column justify-center" style="height: 100%;">
                     <v-btn-toggle
                       v-model="filterStatus"
                       color="primary"
@@ -115,7 +114,7 @@
                 </v-card>
               </v-col>
               <v-col cols="12" md="6">
-                <v-card>
+                <v-card style="height: 100%;">
                   <v-card-title>Visited Countries</v-card-title>
                   <v-card-text>
                     <PieChart
