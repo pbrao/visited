@@ -1,5 +1,7 @@
 -- Create profiles table with error handling
 DO $$
+DECLARE
+BEGIN
 BEGIN
     -- Create table if it doesn't exist
     IF NOT EXISTS (SELECT 1 FROM pg_tables WHERE tablename = 'profiles') THEN
@@ -61,4 +63,4 @@ BEGIN
         ON profiles FOR INSERT
         WITH CHECK (auth.uid() = id);
     END IF;
-END $$;
+END $$ LANGUAGE plpgsql;
