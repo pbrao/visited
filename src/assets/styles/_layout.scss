@@ -43,11 +43,10 @@
 
 .fixed-header-table {
   border: none !important;
-  height: 100%;
 
   :deep(.v-data-table__wrapper) {
-    overflow-y: scroll !important;
-    height: calc(100vh - 500px) !important;
+    overflow-y: auto !important;
+    max-height: 400px !important;
   }
 
   :deep(.v-data-table__header) {
@@ -56,4 +55,14 @@
     z-index: 1;
     background-color: $background-color;
   }
+}
+
+// Remove any overflow: hidden from parent containers
+.main-container,
+.content-wrapper,
+.sticky-wrapper,
+.sticky-section,
+.sticky-filter,
+.scrollable-content {
+  overflow: visible;
 }

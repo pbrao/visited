@@ -95,6 +95,7 @@
                   hover
                   fixed-header
                   class="fixed-header-table"
+                  height="400"
                   hide-default-footer
                 >
                   <template v-slot:item.visited="{ item }">
