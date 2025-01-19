@@ -86,6 +86,26 @@
                   <v-card-text>
                     <p>{{ visitedCount }} / {{ totalCountries }} Countries Visited</p>
                     <p>{{ visitedPercentage }}% Visited, {{ remainingPercentage }}% Remaining</p>
+                    
+                    <!-- Add filter buttons -->
+                    <v-btn-toggle
+                      v-model="filterStatus"
+                      color="primary"
+                      mandatory
+                      class="mt-4"
+                    >
+                      <v-btn value="all">
+                        All
+                      </v-btn>
+
+                      <v-btn value="visited">
+                        Visited
+                      </v-btn>
+
+                      <v-btn value="remaining">
+                        Remaining
+                      </v-btn>
+                    </v-btn-toggle>
                   </v-card-text>
                 </v-card>
               </v-col>
@@ -171,6 +191,7 @@ export default {
       profileDialog: false,
       countries: [], // All countries with user-specific visited status
       filterText: '', // New property for filter text
+      filterStatus: 'all', // 'all', 'visited', or 'remaining'
       headers: [
         {
           title: '#',
@@ -213,12 +234,25 @@ export default {
         ? (100 - this.visitedPercentage).toFixed(2)
         : 0;
     },
-    filteredCountries() { // New computed property
-      const filtered = !this.filterText 
+    filteredCountries() {
+      // First filter by search text
+      let filtered = !this.filterText 
         ? this.countries 
         : this.countries.filter(country =>
             country.name.toLowerCase().startsWith(this.filterText.toLowerCase())
           );
+
+      // Then filter by status
+      switch (this.filterStatus) {
+        case 'visited':
+          filtered = filtered.filter(country => country.visited);
+          break;
+        case 'remaining':
+          filtered = filtered.filter(country => !country.visited);
+          break;
+        // 'all' case is handled by default
+      }
+
       console.log('Filtered Countries:', JSON.stringify(filtered, null, 2)); // Debugging
       return filtered;
     },
